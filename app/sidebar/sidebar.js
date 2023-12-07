@@ -1,4 +1,6 @@
 import Link from "next/link";
+import Weather from "../weather/weather";
+import TodoList from "../component/TodoList";
 
 export default function Sidebar() {
     return (
@@ -190,6 +192,8 @@ export default function Sidebar() {
                         </div>
                     </div>
                 </div>
+                <Weather />
+                <TodoList />
             </div>
         </div>
     );

@@ -22,7 +22,7 @@ export default function Weather() {
             <h1 className="text-5xl font-bold text-white">Weather</h1>
             <ul>
                 <li className="text-white">{weather.cityName}</li>
-                <li className="text-white">{weather.temperature}</li>
+                <li className="text-white">{Math.floor(weather.temperature)} °C</li>
                 <li className="text-white">{weather.description}</li>
                 <li className="text-white"><img src={weather.icon} /></li>
             </ul>

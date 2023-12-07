@@ -1,3 +1,4 @@
+"use client"
 import React, { useState } from 'react';
 
 export default function TodoList() {
@@ -15,8 +16,9 @@ export default function TodoList() {
     };
 
     return (
-        <div className="todo-list">
+        <div c>
             <input
+                className="text-black"
                 type="text"
                 value={newTask}
                 onChange={(e) => setNewTask(e.target.value)}
