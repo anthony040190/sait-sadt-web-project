@@ -1,74 +1,43 @@
-"use client";
-import React from 'react';
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+"use client"
 
+import { useUserAuth } from "./_utils/auth-context";
+import Link from "next/link";
 
-export default function Login() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+export default function LandingPage() {
+  const { user, gitHubSignIn, firebaseSignOut } = useUserAuth();
 
-  const handleLogin = () => {
-    if (username === 'your_username' && password === 'your_password') {
-      alert('Login successful!');
-    } else {
-      alert('Invalid username or password. Please try again.');
+  const handleLogin = async () => {
+    try {
+      await gitHubSignIn();
+    } catch (error) {
+      console.error("Error signing in with GitHub:", error);
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      await firebaseSignOut();
+    } catch (error) {
+      console.error("Error signing out:", error);
     }
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.label}>Username:</Text>
-      <TextInput
-        style={styles.input}
-        value={username}
-        onChangeText={(text) => setUsername(text)}
-        placeholder="Enter your username"
-      />
-
-      <Text style={styles.label}>Password:</Text>
-      <TextInput
-        style={styles.input}
-        value={password}
-        onChangeText={(text) => setPassword(text)}
-        placeholder="Enter your password"
-        secureTextEntry
-      />
-
-      <TouchableOpacity style={styles.button} onPress={handleLogin}>
-        <Text style={styles.buttonText}>Login</Text>
-      </TouchableOpacity>
-    </View>
+    <main>
+        <h1 className="text-4xl font-bold mb-5">Login</h1>
+      {user ? (
+        <div className="text-lg">
+          <p>
+            Welcome, {user.displayName} ({user.email})
+          </p>
+          <p>
+            <button className="text-lg hover:underline" onClick={handleLogout}>Logout</button>
+          </p>
+          <Link className="text-lg hover:underline" href="app\page.js">To Do List</Link>
+        </div>
+      ) : (
+        <button onClick={handleLogin}>Login with GitHub</button>
+      )}
+    </main>
   );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 16,
-  },
-  label: {
-    fontSize: 16,
-    marginBottom: 8,
-  },
-  input: {
-    width: '100%',
-    height: 40,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    marginBottom: 16,
-    padding: 8,
-  },
-  button: {
-    backgroundColor: '#4caf50',
-    padding: 10,
-    borderRadius: 4,
-    width: '100%',
-    alignItems: 'center',
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 16,
-  },
-});
+};
