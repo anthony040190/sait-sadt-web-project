@@ -8,7 +8,6 @@ export default function Login() {
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
-    // Replace this with your actual authentication logic
     if (username === 'your_username' && password === 'your_password') {
       alert('Login successful!');
     } else {
