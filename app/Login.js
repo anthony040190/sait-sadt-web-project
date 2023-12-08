@@ -33,7 +33,7 @@ export default function LandingPage() {
           <p>
             <button className="text-lg hover:underline" onClick={handleLogout}>Logout</button>
           </p>
-          <Link className="text-lg hover:underline" href="app\page.js">To Do List</Link>
+          <Link className="text-lg hover:underline" href="app\page.js">To Do List / Wethher</Link>
         </div>
       ) : (
         <button onClick={handleLogin}>Login with GitHub</button>
